@@ -45,9 +45,6 @@ class Item(QtCore.QThread):
             sys.stdout.write(str(self.name) + str(self.end_time) + '\n')
             current_machine=machines[self.num_machines[self.conta_machine%len(self.num_machines)]]
             #print self.conta_machine
-            if "Horno" in current_machine.name:
-                if current_machine.add_tons(self.tons):
-                    
                 
             machine_status=current_machine.get_current_status()
             #self.start_time = machine_status
@@ -78,30 +75,4 @@ class Item(QtCore.QThread):
                 current_machine.add_to_queue(self.name)
 
             QtCore.QThread.msleep(self.delay)
-            
-            #if "Horno3" in current_machine.name:
-            #    return
-           
-
-        #while True:
-        # print machines
-        
-        # for machine in machines:
-        #     current_machine=machines[machine]
-        #     try:
-        #         current_machine.sema.acquire()
-        #         self.status = current_machine.name
-                
-        #         sys.stdout.write(str(current_machine.name) + '\n')
-        #         self.row=random.randint(0,5)
-        #         self.statusChanged.emit(self.status)
-        #         self.rowChanged.emit(self.row)
-                
-        #         current_machine.sema.release()
-                
-        #         QtCore.QThread.msleep(self.delay)
-        #     except:
-        #         self.wait()
-            
-            
             
