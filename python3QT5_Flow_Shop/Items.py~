@@ -50,7 +50,7 @@ class Item(QtCore.QThread):
         self.horno_names={"Horno1":False,"Horno2":False,"Horno3":False}
         self.h_name=True        
         self.running=True
-        self.temp_time=day_duration
+        self.temp_time=0
 
     def update(self,name):
         self.horno_names[name[1]]=name[0]
@@ -68,9 +68,10 @@ class Item(QtCore.QThread):
                         service_time=self.list_times[0][self.list_all_machines.index(self.current_machine.name)]
                         self.start_time = self.end_time
                         self.end_time=self.start_time+service_time
-                        if self.end_time>=self.temp_time:
+                        print("substract_time",(self.end_time-self.temp_time))
+                        if (self.end_time-self.temp_time)>=day_duration:
                             self.day+=1
-                            self.temp_time+=day_duration
+                            self.temp_time=self.end_time
                         self.current_machine.add_ServiceTime(self.end_time)
                         sys.stdout.write(str(self.start_time) + '\n')
                         self.c_name=self.current_machine.name
@@ -127,9 +128,10 @@ class Item(QtCore.QThread):
                         self.current_machine.add_tons(self.tons)
                         self.start_time=self.end_time
                         self.end_time=self.start_time+service_time
-                        if self.end_time>=self.temp_time:
+                        print("substract_time",(self.end_time-self.temp_time))
+                        if (self.end_time-self.temp_time)>=day_duration:
                             self.day+=1
-                            self.temp_time+=day_duration
+                            self.temp_time=self.end_time
                         self.current_machine.add_ServiceTime(self.end_time)
                         self.current_machine.add_Temperature(self.temp)
                         self.operation+=1
